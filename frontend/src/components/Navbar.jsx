@@ -82,10 +82,10 @@ const Navbar = () => {
             <img src={assets.dropdown_icon} alt="menu-close" className="h-4 rotate-180"/>
             <p>Back</p>
           </div>
+          <NavLink onClick={()=>{setMenuOpen(false)}} className='pl-6 p-2 border' to="/" >HOME</NavLink>
           <NavLink onClick={()=>{setMenuOpen(false)}} className='pl-6 p-2 border' to="/collection" >COLLECTION</NavLink>
           <NavLink onClick={()=>{setMenuOpen(false)}} className='pl-6 p-2 border' to="/about" >ABOUT</NavLink>
           <NavLink onClick={()=>{setMenuOpen(false)}} className='pl-6 p-2 border' to="/contact" >CONTACT</NavLink>
-          <NavLink onClick={()=>{setMenuOpen(false)}} className='pl-6 p-2 border' to="/" >HOME</NavLink>
         </div>
       </div>
     </div>
