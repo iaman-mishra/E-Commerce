@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import LatesCollection from '../components/LatesCollection.jsx'
 import BestSeller from '../components/BestSeller.jsx'
 import OurPolicies from '../components/OurPolicies.jsx'
+import NewsLetterBox from '../components/NewsLetterBox.jsx'
 
 const Home = () => {
   
@@ -12,6 +13,7 @@ const Home = () => {
       <LatesCollection />
       <BestSeller/>
       <OurPolicies/>
+      <NewsLetterBox/>
     </div>
   )
 }
