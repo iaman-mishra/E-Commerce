@@ -1,7 +1,14 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import userModel from "../models/userModel.js";
 import validator from 'validator';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
+
+const createToken = (id)=>{
+    return jwt.sign({id},process.env.JWT_SECRET_KEY)
+}
 
 const userLogin = async () => {
 
@@ -35,11 +42,13 @@ const registerUser = async (req, res) => {
         password:hashedPassword
     })
 
-    const result = await newUser.save()
-    res.json({success:true, message: "User created successfully" ,result})
+    const user = await newUser.save()
+    const token = createToken(user._id)
+    res.json({success:true, message: "User created successfully", token})
 
   } catch (error) {
     console.log(error);
+    res.json({success:false, message: "Error creating user" })
   }
 };
 
