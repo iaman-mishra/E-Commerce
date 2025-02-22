@@ -4,6 +4,7 @@ import connectDB from "./config/mongoDB.js";
 import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
+import cors from 'cors'
 
 // App Config
 const app = express();
@@ -13,6 +14,7 @@ connectCloudinary();
 
 // middlewears
 app.use(express.json());
+app.use(cors())
 
 // API Endpoints
 
