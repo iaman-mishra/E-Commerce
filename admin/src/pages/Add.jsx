@@ -34,14 +34,16 @@ const add = ({ token }) => {
       if (image3) formData.append("image3", image3);
       if (image4) formData.append("image4", image4);
 
+      const toastId = toast.loading("Please wait...");
+
       const respone = await axios.post(
         backendUrl + "/api/product/add",
         formData,
         { headers: { token } }
       );
-
+      
       if (respone.data.sucess) {
-        toast.success(respone.data.message);
+        toast.update(toastId, { render: respone.data.message, type: "success", isLoading: false, autoClose: 3000 });
         // Reset form fields to default values
         SetName("");
         SetDescription("");
@@ -55,7 +57,7 @@ const add = ({ token }) => {
         SetImage3(false);
         SetImage4(false);
       } else {
-        toast.error(respone.data.message);
+        toast.update(toastId, { render: respone.data.message, type: "error", isLoading: false, autoClose: 3000 });
       }
     } catch (error) {
       console.log(error);
@@ -81,6 +83,7 @@ const add = ({ token }) => {
               type="file"
               id="image1"
               hidden
+              accept="image/*"
             />
           </label>
           <label htmlFor="image2">
@@ -94,6 +97,7 @@ const add = ({ token }) => {
               type="file"
               id="image2"
               hidden
+              accept="image/*"
             />
           </label>
           <label htmlFor="image3">
@@ -107,6 +111,7 @@ const add = ({ token }) => {
               type="file"
               id="image3"
               hidden
+              accept="image/*"
             />
           </label>
           <label htmlFor="image4">
@@ -120,6 +125,7 @@ const add = ({ token }) => {
               type="file"
               id="image4"
               hidden
+              accept="image/*"
             />
           </label>
         </div>
