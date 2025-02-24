@@ -36,6 +36,7 @@ const ShopContextProvider = ({ children }) => {
       cartData[id][Size] = 1;
     }
     SetCartItem(cartData);
+
   };
 
   const updateQuantity = async (id, itemsize, quantity) => {
