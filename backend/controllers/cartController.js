@@ -1,22 +1,20 @@
-import userModel from "../models/userModel"
-
-im
+import userModel from "../models/userModel.js"
 
 const addToCart = async (req,res)=>{
     try {
-        const {userId, itemId, size} = req.body
+        const {userId, id, Size} = req.body
         const userData = await userModel.findById(userId)
         let cartData = await userData.cartData;
 
-        if (cartData[itemId]) {
-            if(cartData[itemId][size]){
-                cartData[itemId][size] += 1
+        if (cartData[id]) {
+            if(cartData[id][Size]){
+                cartData[id][Size] += 1
             }else{
-                cartData[itemId][size] = 1
+                cartData[id][Size] = 1
             }
         }else{
-            cartData[itemId] = {}
-            cartData[itemId][size]= 1
+            cartData[id] = {}
+            cartData[id][Size]= 1
         }
 
         await userModel.findByIdAndUpdate(userId,{cartData})
@@ -29,21 +27,28 @@ const addToCart = async (req,res)=>{
     }
 }
 
-const updateCart = async (req,res)=>{
+const updateCart = async (req, res) => {
     try {
-        const {userId, itemId, size, quantity} = req.body
-        const userData = await userModel.findById(userId)
+        const { userId, id, Size, quantity } = req.body;
+        const userData = await userModel.findById(userId);
         let cartData = await userData.cartData;
 
-        cartData[itemId][size] = quantity
-        await userModel.findByIdAndUpdate(userId,{cartData})
-        res.json({success:true, message: "Cart Updated"})
+        if (quantity === 0) {
+            delete cartData[id][Size]; // Remove the specific size from the item
+            if (Object.keys(cartData[id]).length === 0) {
+                delete cartData[id]; // Remove the item if no sizes remain
+            }
+        } else {
+            cartData[id][Size] = quantity;
+        }
 
+        await userModel.findByIdAndUpdate(userId, { cartData });
+        res.json({ success: true, message: "Cart Updated" });
     } catch (error) {
-        console.log(error)
-        res.json({success:false, message: error.message})
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
-}
+};
 
 const getUserCart = async (req,res)=>{
     try {

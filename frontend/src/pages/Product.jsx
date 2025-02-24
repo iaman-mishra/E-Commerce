@@ -21,7 +21,7 @@ const Product = () => {
     });
   };
 
-  console.log(SetProductData);
+ 
   
 
   useEffect(() => {

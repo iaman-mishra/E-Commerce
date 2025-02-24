@@ -9,20 +9,23 @@ const Cart = () => {
   const [CartData, SetCartData] = useState([]);
 
   useEffect(() => {
-    const tempData = [];
-    for (const items in CartItem) {
-      for (const item in CartItem[items]) {
-        if (CartItem[items][item] > 0) {
-          tempData.push({
-            _id: items,
-            size: item,
-            quantity: CartItem[items][item],
-          });
+    if (products.length > 0) {
+      const tempData = [];
+      for (const items in CartItem) {
+        for (const item in CartItem[items]) {
+          if (CartItem[items][item] > 0) {
+            tempData.push({
+              _id: items,
+              sizes: item,
+              quantity: CartItem[items][item],
+            });
+          }
         }
       }
+      SetCartData(tempData);
     }
-    SetCartData(tempData);
-  }, [CartItem]);
+
+  },[CartItem,products]);
 
   return (
     <div className="border-t pt-14">
@@ -40,7 +43,7 @@ const Cart = () => {
             >
               <div className="flex items-start gap-6">
                 <img
-                  src={product.image[0]}
+                  src={product.images[0]}
                   alt="not found"
                   className="w-16 sm:w-20"
                 />
@@ -54,7 +57,7 @@ const Cart = () => {
                       {product.price}
                     </p>
                     <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">
-                      {item.size}
+                      {item.sizes}
                     </p>
                   </div>
                 </div>
@@ -62,15 +65,15 @@ const Cart = () => {
               <input
                 type="number"
                 min={1}
-                defaultValue={item.quantity}
+                Value={item.quantity}
                 className="border max-w-1 sm:max-w-20 px-1 sm:px-2 py-1"
-                onChange={(e) => e.target.value ==='' || e.target.value ==='0' ? null : updateQuantity(item._id, item.size, parseInt(e.target.value))}
+                onChange={(e) => e.target.value ==='' || e.target.value ==='0' ? null : updateQuantity(item._id, item.sizes, parseInt(e.target.value))}
               />
               <img
                 src={assets.bin_icon}
                 alt=""
                 className="w-4 mr-4 sm:w-5 cursor-pointer"
-                onClick={() => updateQuantity(item._id, item.size, 0)}
+                onClick={() => updateQuantity(item._id, item.sizes, 0)}
               />
             </div>
           );

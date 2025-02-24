@@ -17,6 +17,25 @@ const ShopContextProvider = ({ children }) => {
   const [token, SetToken]=useState(localStorage.getItem("token")?localStorage.getItem("token"):"")
 
 
+
+  const getUserCart = async (token) =>{
+    try {
+      const response = await axios.post(backendUrl+"/api/cart/get",{},{headers:{token}});      
+      if (response.data.success) {
+        SetCartItem(response.data.cartData);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
+
+  useEffect(()=>{
+    if(token){
+      getUserCart(token);
+    }
+  },[]);
+
   const AddToCart = async (id, Size) => {
     if (!Size) {
       toast.error("Select Product Size");
@@ -36,15 +55,33 @@ const ShopContextProvider = ({ children }) => {
       cartData[id][Size] = 1;
     }
     SetCartItem(cartData);
+    toast.success("Product added to cart")
+    if (token) {
+      try {
+        await axios.post(backendUrl+"/api/cart/add",{id,Size},{headers:{token}});
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
 
   };
 
-  const updateQuantity = async (id, itemsize, quantity) => {
-    console.log('Clicked');
-    
+  const updateQuantity = async (id, Size, quantity) => {
+
     let temp = structuredClone(CartItem);
-    temp[id][itemsize] = quantity;
+    temp[id][Size] = quantity;
     SetCartItem(temp);
+
+    if (token) {
+      try {
+        await axios.post(backendUrl+"/api/cart/update",{id,Size,quantity},{headers:{token}})
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
+
   };
 
   const GetCartCount = () => {
