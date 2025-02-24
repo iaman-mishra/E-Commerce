@@ -15,11 +15,14 @@ const Product = () => {
     products.map((item) => {
       if (item._id === id) {
         SetProductData(item);
-        SetImage(item.image[0]);
+        SetImage(item.images[0]);
         return null;
       }
     });
   };
+
+  console.log(SetProductData);
+  
 
   useEffect(() => {
     fetchProductData();
@@ -31,14 +34,14 @@ const Product = () => {
       <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
           <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
-            {ProductData.image.map((image, index) => {
+            {ProductData.images.map((item, index) => {
               return (
                 <img
                   key={index}
-                  src={image}
+                  src={item}
                   alt=""
                   className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
-                  onClick={() => SetImage(image)}
+                  onClick={() => SetImage(item)}
                 />
               );
             })}
@@ -68,18 +71,18 @@ const Product = () => {
           <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
             <div className="flex gap-2">
-              {ProductData.sizes.map((size, index) => {
+              {ProductData.sizes.map((item, index) => {
                 return (
                   <button
                     onClick={() => {
-                      SetSize(size);
+                      SetSize(item);
                     }}
                     className={`border py-2 px-4 bg-gray-100 ${
-                      Size === size ? "border-orange-500" : ""
+                      Size === item ? "border-orange-500" : ""
                     } `}
                     key={index}
                   >
-                    {size}
+                    {item}
                   </button>
                 );
               })}

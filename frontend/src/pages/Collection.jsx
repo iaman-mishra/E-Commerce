@@ -15,7 +15,7 @@ const Collection = () => {
 
   useEffect(()=>{
     SetFilterProducts(products);
-  },[])
+  },[products])
 
   const toggleCategory=(e)=>{
     if (Category.includes(e.target.value)) {
@@ -52,7 +52,7 @@ const Collection = () => {
 
   useEffect(()=>{
     ApllyFilters()
-  },[Category,SubCategory,Search,ShowSearch])
+  },[Category,SubCategory,Search,ShowSearch,products])
 
 
   const SortProduct=()=>{
@@ -158,7 +158,7 @@ const Collection = () => {
         {/* mapping items */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
           {FilterProducts.map((item,index)=>{
-            return <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
+            return <ProductItem key={index} id={item._id} image={item.images} name={item.name} price={item.price} />
           })}
         </div>
         
