@@ -14,6 +14,8 @@ const ShopContextProvider = ({ children }) => {
   const [ShowSearch, SetShowSearch] = useState(false);
   const [Search, SetSearch] = useState("");
   const [CartItem, SetCartItem] = useState({});
+  const [token, SetToken]=useState(localStorage.getItem("token")?localStorage.getItem("token"):"")
+
 
   const AddToCart = async (id, Size) => {
     if (!Size) {
@@ -111,7 +113,11 @@ const ShopContextProvider = ({ children }) => {
         GetCartCount,
         updateQuantity,
         GetCartAmount,
-        navigate
+        navigate,
+        token,
+        SetToken,
+        backendUrl,
+        SetCartItem
       }}
     >
       {children}

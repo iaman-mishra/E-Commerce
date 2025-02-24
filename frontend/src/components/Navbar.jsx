@@ -5,8 +5,16 @@ import { useState } from "react";
 import {shopContext} from '../context/shopContext.jsx'
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const{}=useContext(shopContext);
+  const{ShowSearch,SetShowSearch,GetCartCount,token,SetToken,navigate,SetCartItem}=useContext(shopContext)
 
-  const{ShowSearch,SetShowSearch,GetCartCount}=useContext(shopContext)
+  const logoutHandler=()=>{
+    localStorage.removeItem("token")
+    SetToken("")
+    SetCartItem({})
+    navigate("/login")
+    
+  }
 
   return (
     <div className="flex items-center justify-between font-medium py-5">
@@ -43,18 +51,23 @@ const Navbar = () => {
         />
 
         <div className="group relative">
-          <Link to='/login'><img
+          <img
             src={assets.profile_icon}
             className="w-5 cursor-pointer"
             alt="profile"
-          /></Link>
-          <div className="dropdown-menu group-hover:block  hidden absolute right-0 pt-4 ">
-            <div className="flex flex-col gap-2 w-max p-4 bg-slate-100 rounded-lg shadow-lg text-gray-500">
-              <p className="cursor-pointer hover:text-black">My Profile</p>
-              <p className="cursor-pointer hover:text-black">Orders</p>
-              <p className="cursor-pointer hover:text-black">Logout</p>
+            onClick={()=>{token ? null : navigate("/login") }}
+          />
+
+          {token ?
+            <div className="dropdown-menu group-hover:block  hidden absolute right-0 pt-4 ">
+              <div className="flex flex-col gap-2 w-max p-4 bg-slate-100 rounded-lg shadow-lg text-gray-500">
+                <p className="cursor-pointer hover:text-black">My Profile</p>
+                <p onClick={()=>{navigate("/orders")}} className="cursor-pointer hover:text-black">Orders</p>
+                <p onClick={logoutHandler} className="cursor-pointer hover:text-black">Logout</p>
+              </div>
             </div>
-          </div>
+          : null }
+
         </div>
 
         <Link to="/cart" className="relative">
