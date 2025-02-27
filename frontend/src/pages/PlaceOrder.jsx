@@ -61,6 +61,11 @@ const PlaceOrder = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
+      if (!token) {
+        toast.error("Please login to proceed");
+        navigate('/login');
+        return;
+      }
       let orderItems = [];
       for (const items in CartItem) {
         for (const item in CartItem[items]) {
