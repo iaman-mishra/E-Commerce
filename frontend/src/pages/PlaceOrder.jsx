@@ -68,7 +68,16 @@ const PlaceOrder = () => {
 
         // API CALL FOR STRIPE PAYMENT METHOD
         case "stripe":{
-
+          const toastId = toast.loading("Please wait...");
+          const responseStripe =await axios.post(backendUrl+ "/api/order/stripe", orderData, { headers: { token } });
+          if (responseStripe.data.success) {
+            toast.update(toastId, { render: "Redirecting", type: "success", isLoading: false, autoClose: 3000 });
+            const {session_url} = responseStripe.data;
+            window.location.replace(session_url)
+          }else{
+            toast.update(toastId, { render: "responseStripe.data.message", type: "success", isLoading: false, autoClose: 3000 });
+          }
+          break
         }
 
         // API CALL FOR RAZORPAY PAYMENT METHOD

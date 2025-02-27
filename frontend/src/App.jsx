@@ -3,10 +3,8 @@ import React from "react"
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
-//Import Components
+//Import Components & Pages
 import Navbar from "./components/Navbar";
-
-//Import pages
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
@@ -18,6 +16,8 @@ import PlaceOrder from "./pages/PlaceOrder";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
+import Verify from "./pages/Verify";
+
 
 
 const App = () => {
@@ -36,6 +36,8 @@ const App = () => {
         <Route path="/orders" element={<Orders/>} />
         <Route path="/placeorder" element={<PlaceOrder/>} />
         <Route path="/product/:id" element={<Product/>} />
+        <Route path="/verify" element={<Verify/>} />
+        <Route ></Route>
       </Routes>
       <Footer/>
     </div>
