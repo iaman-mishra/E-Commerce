@@ -28,6 +28,36 @@ const PlaceOrder = () => {
     SetFormData({ ...formData, [name]: value });
   };
 
+  const initPay = (order)=>{
+    const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount: order.amount,
+      currency: order.currency,
+      name: "Order Payment",
+      description: "Order Payment",
+      order_id: order.id,
+      receipt: order.receipt,
+      handler: async (response)=>{
+        console.log(response);
+        try {
+          const {data} = await axios.post(backendUrl+ "/api/order/verifyRazorpay",response,{headers:{token}});
+          if (data.success) {
+            SetCartItem({})
+            navigate('/orders')
+            toast.success(data.message);
+          }else{
+            toast.error(data.message);
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error(error.message)
+        }
+      }
+    }
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  }
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -82,9 +112,18 @@ const PlaceOrder = () => {
 
         // API CALL FOR RAZORPAY PAYMENT METHOD
         case "razorpay":{
-
+          const toastId = toast.loading("Please wait...");
+          const responseRazorpay = await axios.post(backendUrl+"/api/order/razorpay", orderData, { headers: { token } });
+          if (responseRazorpay.data.success) {
+            toast.update(toastId, { render: "Redirecting", type: "success", isLoading: false, autoClose: 3000 });
+            console.log(responseRazorpay.data.order);
+            initPay(responseRazorpay.data.order);
+          }
         }
 
+        default:{
+          break;
+        }
       }
     } catch (error) {}
   };
