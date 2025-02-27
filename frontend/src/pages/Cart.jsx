@@ -65,7 +65,7 @@ const Cart = () => {
               <input
                 type="number"
                 min={1}
-                Value={item.quantity}
+                value={item.quantity}
                 className="border max-w-1 sm:max-w-20 px-1 sm:px-2 py-1"
                 onChange={(e) => e.target.value ==='' || e.target.value ==='0' ? null : updateQuantity(item._id, item.sizes, parseInt(e.target.value))}
               />

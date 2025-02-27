@@ -40,8 +40,6 @@ const List = ({token}) => {
     fetchList();
   },[]);
 
-  console.log(list);
-
   return (
   
     <>
