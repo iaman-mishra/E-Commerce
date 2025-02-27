@@ -16,8 +16,7 @@ const LatesCollection = () => {
       <div className="py-8 text-center text-3xl">
         <Title text1="LATEST" text2="COLLECTIONS" />
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
-          nemo sequi ex officia harum,
+          "Experience the perfect blend of sophistication and trend with EVOQUE's latest collection—designed for those who dare to stand out."
         </p>
       </div>
 

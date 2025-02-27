@@ -22,7 +22,7 @@ const Contact = () => {
             Sector 93 Noida <br /> GB Nagar, UTTAR PRADESH, INDIA
           </p>
           <p className=" text-gray-500">
-            Tel: (+91) 1234567890 <br /> Email: support@RatnaRoyals.in
+            Tel: (+91) 1234567890 <br /> Email: support@evoque.in
           </p>
           <p className="font-semibold text-xl text-gray-600">
             Careers at Forever

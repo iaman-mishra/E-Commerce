@@ -18,9 +18,10 @@ const Navbar = () => {
 
   return (
     <div className="flex items-center justify-between font-medium py-5">
-      <Link to='/'><img src={assets.logo} className="w-36" alt="logo" /></Link>
 
-      <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
+        <Link to='/'><h1 className="text-3xl logo font-bold">EVOQUE</h1></Link>
+
+        <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
         <NavLink to="/" className="flex flex-col items-center gap-1">
           <p>HOME</p>
           <hr className="hidden w-2/4 border-none h-[1.5px] bg-gray-700 fill-black }" />
@@ -40,6 +41,12 @@ const Navbar = () => {
           <p>CONTACT</p>
           <hr className="hidden w-2/4 border-none h-[1.5px] bg-gray-700 fill-black" />
         </NavLink>
+
+        <a href="https://evoque-admin.vercel.app/" target="_blank" className="border px-5 text-xs py-1 rounded-full -mt-2 ">
+          <p className="mt-1">Admin Panel</p>
+        </a>
+
+        
       </ul>
 
       <div className="flex items-center gap-6">
@@ -102,6 +109,9 @@ const Navbar = () => {
           <NavLink onClick={()=>{setMenuOpen(false)}} className='pl-6 p-2 border' to="/collection" >COLLECTION</NavLink>
           <NavLink onClick={()=>{setMenuOpen(false)}} className='pl-6 p-2 border' to="/about" >ABOUT</NavLink>
           <NavLink onClick={()=>{setMenuOpen(false)}} className='pl-6 p-2 border' to="/contact" >CONTACT</NavLink>
+          <a href="https://evoque-admin.vercel.app/" target="_blank" lassName='border'>
+            <p className="pl-6 p-2">Admin Panel</p>
+          </a>
         </div>
       </div>
     </div>

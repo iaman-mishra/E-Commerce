@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Outfit:wght@100..900&family=Prata&family=Syne:wght@400..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 
 
@@ -11,6 +13,10 @@ a.active hr{
 
 *{
     font-family: 'Outfit';
+}
+
+.logo{
+    font-family: 'Orbitron';
 }
 
 .prata-regular {
