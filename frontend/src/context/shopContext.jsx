@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, } from "react-router-dom";
 import axios from 'axios';
 export const shopContext = createContext();
 
 const ShopContextProvider = ({ children }) => {
+  
   
   const navigate=useNavigate();
   const currency = "₹";
@@ -135,6 +136,12 @@ const ShopContextProvider = ({ children }) => {
   useEffect(()=>{
     fetchProducts();
   },[])
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <shopContext.Provider
