@@ -1,5 +1,6 @@
 import React from "react";
 import { assets } from "../assets/assets.js";
+import poster from '../assets/poster.jpg';
 const Hero = () => {
   return (
     <div className="flex flex-col sm:flex-row border border-gray-400">
@@ -22,7 +23,7 @@ const Hero = () => {
       </div>
 
       {/* Hero right side */}
-      <img className="w-full sm:w-1/2" src={assets.hero_img} alt="" />
+      <img className="w-full sm:w-1/2" src={poster} alt="" />
     </div>
   );
 };
