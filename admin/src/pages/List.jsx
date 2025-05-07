@@ -5,11 +5,13 @@ import { toast } from 'react-toastify';
 
 const List = ({token}) => {
 
+  const [currentPage, setCurrentPage] = useState(2);
+  
   const[list,SetList]=useState([]);
 
   const fetchList = async ()=>{
     try {
-      const response = await axios.get(backendUrl+"/api/product/list");
+      const response = await axios.get(backendUrl+"/api/product/list",{headers:{page:currentPage}});
       if (response.data.sucess) {
         SetList(response.data.products);
       }else{
@@ -20,6 +22,18 @@ const List = ({token}) => {
       toast.error(error.message)
     }
   }
+
+  // const goToPreviousPage = () => {
+  //   setCurrentPage((page) => Math.max(page - 1, 1));
+  // };
+
+  // const goToNextPage = () => {
+  //   setCurrentPage((page) => Math.min(page + 1, pageSize));
+  // }
+
+  // const goToPage = (page) => {
+  //   setCurrentPage(Math.max(1, Math.min(page, maxPage)));
+  // }
 
   const removeProduct = async (id)=>{
     try {
@@ -67,6 +81,8 @@ const List = ({token}) => {
             </div>
           )
         })}
+
+        {list.map}
 
       </div>
     </>

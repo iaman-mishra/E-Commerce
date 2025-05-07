@@ -63,8 +63,8 @@ const addProduct = async (req, res) => {
 
 // function to get all products
 const listProduct = async (req, res) => {
-  const { page = 1, pageSize = 10 } = req.body;
-
+  const  pageSize = 10 ;
+  const page =  Number(req.headers['page']) || 1;
   try {
     const totalProducts = await productModel.countDocuments();
     const products = await productModel.find({}).skip((page - 1) * pageSize).limit(pageSize);
